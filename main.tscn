@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct7mn558jy178"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_std4b"]
+[ext_resource type="PackedScene" uid="uid://pcaq2yeuv6qp" path="res://player.tscn" id="2_wgo8f"]
+
+[node name="Game" type="Node2D"]
+position = Vector2(482, 276)
+script = ExtResource("1_std4b")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ConnectionPanel" type="PanelContainer" parent="CanvasLayer"]
+offset_right = 192.0
+offset_bottom = 101.0
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/ConnectionPanel"]
+layout_mode = 2
+columns = 2
+
+[node name="HostLabel" type="Label" parent="CanvasLayer/ConnectionPanel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Host:"
+
+[node name="HostField" type="LineEdit" parent="CanvasLayer/ConnectionPanel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "127.0.0.1"
+
+[node name="PortLabel" type="Label" parent="CanvasLayer/ConnectionPanel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Port:"
+
+[node name="PortField" type="LineEdit" parent="CanvasLayer/ConnectionPanel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "5000"
+
+[node name="ServerButton" type="Button" parent="CanvasLayer/ConnectionPanel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Server"
+
+[node name="ClientButton" type="Button" parent="CanvasLayer/ConnectionPanel/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Client"
+
+[node name="MessageLabel" type="Label" parent="CanvasLayer"]
+offset_right = 1154.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+horizontal_alignment = 1
+
+[node name="SyncLostLabel" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "RESET"
+
+[node name="ServerPlayer" parent="." instance=ExtResource("2_wgo8f")]
+position = Vector2(-297, -7)
+
+[node name="ClientPlayer" parent="." instance=ExtResource("2_wgo8f")]
+position = Vector2(338, 2)
+
+[connection signal="pressed" from="CanvasLayer/ConnectionPanel/GridContainer/ServerButton" to="." method="_on_server_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ConnectionPanel/GridContainer/ClientButton" to="." method="_on_client_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_ResetButton_pressed"]
