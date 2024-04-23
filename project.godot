@@ -6,28 +6,123 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=5
+config_version=4
+
+_global_script_classes=[ {
+"base": "AnimationPlayer",
+"class": "NetworkAnimationPlayer",
+"language": "GDScript",
+"path": "res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd"
+}, {
+"base": "Node",
+"class": "NetworkRandomNumberGenerator",
+"language": "GDScript",
+"path": "res://addons/godot-rollback-netcode/NetworkRandomNumberGenerator.gd"
+}, {
+"base": "Node",
+"class": "NetworkTimer",
+"language": "GDScript",
+"path": "res://addons/godot-rollback-netcode/NetworkTimer.gd"
+} ]
+_global_script_class_icons={
+"NetworkAnimationPlayer": "",
+"NetworkRandomNumberGenerator": "",
+"NetworkTimer": ""
+}
 
 [application]
 
-config/name="GGPO"
-run/main_scene="res://main.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/name="ARK"
+run/main_scene="res://World.tscn"
+config/icon="res://icon.png"
 
 [autoload]
 
 SyncManager="*res://addons/godot-rollback-netcode/SyncManager.gd"
 SyncDebugger="*res://addons/godot-rollback-netcode/SyncDebugger.gd"
+SyncReplay="*res://addons/godot-rollback-netcode/SyncReplay.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-rollback-netcode/plugin.cfg")
+enabled=PoolStringArray( "res://addons/godot-rollback-netcode/plugin.cfg" )
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
 
 [input]
 
 sync_debug={
 "deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194342,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
-]
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777254,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
 }
+p1_kick={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+p1_punch={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":70,"unicode":0,"echo":false,"script":null)
+ ]
+}
+p1_block={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777237,"unicode":0,"echo":false,"script":null)
+ ]
+}
+p2_kick={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":79,"unicode":0,"echo":false,"script":null)
+ ]
+}
+p2_punch={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":75,"unicode":0,"echo":false,"script":null)
+ ]
+}
+p2_block={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":74,"unicode":0,"echo":false,"script":null)
+ ]
+}
+p1_move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+p1_move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+p2_move_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777231,"unicode":0,"echo":false,"script":null)
+ ]
+}
+p2_move_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777233,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_render/layer_1="player"
+2d_render/layer_3=false
+
+[network]
+
+rollback/debug/rollback_ticks=5
+rollback/debug/random_rollback_ticks=10
+rollback/log_inspector/replay_match_scene_path="res://World.tscn"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
